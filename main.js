@@ -1,8 +1,8 @@
 /*jslint node:true, vars:true, bitwise:true, unparam:true */
 /*jshint unused:true */
 //dog name twitter hashtags that the code will monitor for
-var dog1 = '#fluffythedog';
-var dog2 = '#rufusthedog';
+var candidate1 = '#hillary';
+var candidate2 = '#trump';
 
 //module requires:
 //geocoder module and settings
@@ -73,11 +73,11 @@ var display = new lcd.Jhd1313m1(0, 0x3E, 0x62);
 
 //begin twitter stream tracking the hashtags specified above 
 var stream = T.stream('statuses/filter', {
-    track: [dog1, dog2]
+    track: [candidate1, candidate2]
 })
 
-var dog1_tweets = 0;
-var dog2_tweets = 0;
+var candidate1_tweets = 0;
+var candidate2_tweets = 0;
 var dog_side = 1;
 var tweet_lat = 0;
 var tweet_lon = 0;
@@ -126,23 +126,23 @@ stream.on('tweet', function(tweet) {
     console.log("tweet stream is on")
     var text_body = tweet['text'];
 
-    //if the tweet contains hashtag for dog1:
-    if (text_body.toLowerCase().indexOf(dog1) != -1) {
-        dog1_tweets = dog1_tweets + 1;
+    //if the tweet contains hashtag for candidate1:
+    if (text_body.toLowerCase().indexOf(candidate1) != -1) {
+        candidate1_tweets = candidate1_tweets + 1;
         console.log(tweet['text'])
-        console.log('dog 1 tweets: ' + dog1_tweets);
+        console.log('dog 1 tweets: ' + candidate1_tweets);
 
         //LCD controls 
         display.setColor(0, 155, 155);
         display.setCursor(0, 0);
-        display.write(dog1_tweets + ' for ' + dog1);
+        display.write(candidate1_tweets + ' for ' + candidate1);
         display.setCursor(1, 0);
-        display.write(dog2_tweets + ' for ' + dog2);
+        display.write(candidate2_tweets + ' for ' + candidate2);
 
         //Servo controls 
         if (dog_side == 2) {
 
-            myUln200xa_obj.reverse((dog1_tweets + dog2_tweets) * 50);
+            myUln200xa_obj.reverse((candidate1_tweets + candidate2_tweets) * 50);
             myUln200xa_obj.stop();
             dog_side = 1;
         } else if (dog_side == 1) {
@@ -153,23 +153,23 @@ stream.on('tweet', function(tweet) {
         }
     }
 
-    //if the tweet contains hashtag for dog2:
-    else if (text_body.toLowerCase().indexOf(dog2) != -1) {
-        dog2_tweets = dog2_tweets + 1;
+    //if the tweet contains hashtag for candidate2:
+    else if (text_body.toLowerCase().indexOf(candidate2) != -1) {
+        candidate2_tweets = candidate2_tweets + 1;
         console.log(tweet['text'])
-        console.log(dog2 + ' tweets: ' + dog2_tweets);
+        console.log(candidate2 + ' tweets: ' + candidate2_tweets);
 
         //LCD controls
         display.setColor(0, 155, 155);
         display.setCursor(0, 0);
-        display.write(dog1_tweets + ' for ' + dog1);
+        display.write(candidate1_tweets + ' for ' + candidate1);
         display.setCursor(1, 0);
-        display.write(dog2_tweets + ' for ' + dog2);
+        display.write(candidate2_tweets + ' for ' + candidate2);
 
         //servo controls 
         if (dog_side == 1) {
             dog_side = 2;
-            myUln200xa_obj.forward((dog2_tweets + dog1_tweets) * 50);
+            myUln200xa_obj.forward((candidate2_tweets + candidate1_tweets) * 50);
             myUln200xa_obj.stop();
         } else if (dog_side == 2) {
             myUln200xa_obj.forward(50);
@@ -178,21 +178,21 @@ stream.on('tweet', function(tweet) {
         }
 
     };
-    //victory condition met (first dog to 10 votes)
-    if (dog1_tweets >= 10) {
+    //victory condition met (first candidate to 10 votes)
+    if (candidate1_tweets >= 10) {
         display.setColor(0, 255, 0);
         display.setCursor(0, 0);
-        display.write(dog1 + "        ");
+        display.write(candidate1 + "        ");
         display.setCursor(1, 0);
-        display.write("Is cutest dog!");
+        display.write("Is most popular!");
     }
 
-    if (dog2_tweets >= 10) {
+    if (candidate2_tweets >= 10) {
         display.setColor(0, 255, 0);
         display.setCursor(0, 0);
-        display.write(dog2 + "        ");
+        display.write(candidate2 + "        ");
         display.setCursor(1, 0);
-        display.write("Is cutest dog!");
+        display.write("Is most popular!");
     }
 });
 
