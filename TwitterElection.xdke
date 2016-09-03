@@ -1,8 +1,8 @@
 {
   "project": {
-    "projectSettingsVersion": "2.0.0",
+    "projectSettingsVersion": "3.0.0",
     "initialAutoPluginCount": 0,
-    "currentBuildConfiguration": "Android",
+    "currentBuildConfiguration": null,
     "projectFiles": {},
     "projectDirectories": {}
   },
@@ -14,17 +14,17 @@
         "seen": true,
         "name": "README.md"
       },
-      "TwitterDogs.xdk": {
+      "TwitterElection.xdk": {
         "previousModTime": 1464192388000,
         "modified": 1464192388000,
         "seen": true,
-        "name": "TwitterDogs.xdk"
+        "name": "TwitterElection.xdk"
       },
-      "TwitterDogs.xdke": {
+      "TwitterElection.xdke": {
         "previousModTime": 1464192388000,
         "modified": 1464192388000,
         "seen": true,
-        "name": "TwitterDogs.xdke"
+        "name": "TwitterElection.xdke"
       },
       "icon.png": {
         "previousModTime": 1464192388000,
@@ -86,5 +86,8 @@
         "previousModTime": 1464972283282
       }
     }
+  },
+  "editorTab": {
+    "currentEditorMode": 0
   }
 }
